@@ -16,6 +16,7 @@ import {
     useDisclosure,
     Image,
   } from '@chakra-ui/react';
+  import {Link as RouterLink}  from 'react-router-dom';
   import { InputGroup,InputLeftElement } from '@chakra-ui/react';
   import { Input } from '@chakra-ui/react'
   import { FaRegHeart, FaShoppingCart, FaStore } from "react-icons/fa";
@@ -124,8 +125,10 @@ import Home from '../pages/carasoul';
                             size={'sm'}
                             src='https://www.sephora.com/img/ufe/icons/me-active.svg'
                             />
-                            <Link href='/'>
+                            <Link href='/signin'>
+                            <RouterLink to='/sigin'>
                             <Text ml='3px' mt={1}>SignIn</Text>
+                            </RouterLink>
                             </Link>
                                 </Flex>
                             
@@ -135,9 +138,9 @@ import Home from '../pages/carasoul';
                             <MenuItem>Beauty Insider Summary</MenuItem>
                             <MenuItem>Rewards Bazar</MenuItem>
                             <MenuDivider />
-                            <MenuItem><Button bgColor='black' color='white' _hover={{
+                            <MenuItem> <RouterLink to='/sigin'><Button bgColor='black' color='white' _hover={{
                 bg: 'red',
-              }}>SignIn</Button></MenuItem>
+              }}>SignIn</Button></RouterLink></MenuItem>
                         </MenuList>
             </Menu>
           </Flex>
@@ -219,7 +222,7 @@ import Home from '../pages/carasoul';
                   color={linkColor}
                   _hover={{
                     textDecoration: 'none',
-                    color: linkHoverColor,
+                    color: linkHoverColor, 
                   }}>
                   {navItem.label}
                 </Link>

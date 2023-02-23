@@ -219,7 +219,7 @@ import {
       children: [
         {
           label: 'All New',
-          href: '#',
+          href: '/newbeautyProducts',
         },
         {
           label: 'Just Dropped',
