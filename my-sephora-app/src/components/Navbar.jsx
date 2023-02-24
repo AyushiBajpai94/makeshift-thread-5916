@@ -49,9 +49,13 @@ import GorgeousLand1 from '../GorgeousLand1.png'
   import ModalheadNav from '../pages/Modal'
   import SubNavbar from '../pages/SubNavbar'
 import Home from '../pages/carasoul';
+import { useContext } from 'react';
+import { AuthContext } from '../Context/AuthContextProvider';
   
   export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure();
+
+    const{isAuth,logout}=useContext(AuthContext)
   
     return (
           
@@ -125,11 +129,11 @@ import Home from '../pages/carasoul';
                             size={'sm'}
                             src='https://www.sephora.com/img/ufe/icons/me-active.svg'
                             />
-                            <Link href='/signin'>
-                            <RouterLink to='/sigin'>
-                            <Text ml='3px' mt={1}>SignIn</Text>
+                            
+                            <RouterLink to='/login'>
+                            <Text ml='3px' mt={1}>{isAuth ? 'SignOut' : 'SignIn'}</Text>
                             </RouterLink>
-                            </Link>
+                            
                                 </Flex>
                             
                         </MenuButton>
@@ -138,22 +142,27 @@ import Home from '../pages/carasoul';
                             <MenuItem>Beauty Insider Summary</MenuItem>
                             <MenuItem>Rewards Bazar</MenuItem>
                             <MenuDivider />
-                            <MenuItem> <RouterLink to='/sigin'><Button bgColor='black' color='white' _hover={{
+                            <MenuItem> <RouterLink to='/login'><Button bgColor='black' color='white' _hover={{
                 bg: 'red',
-              }}>SignIn</Button></RouterLink></MenuItem>
+              }}>{isAuth ? 'SignOut' : 'SignIn'}</Button></RouterLink></MenuItem>
+
+<MenuItem> <RouterLink to='/login'><Button bgColor='black' color='white' _hover={{
+                bg: 'red', 
+              }} onClick={logout}>{isAuth ? 'SignOut' : 'Info'}</Button></RouterLink></MenuItem>
                         </MenuList>
+                        
             </Menu>
           </Flex>
                     </Box>
                     <Box ml={2}>
                     <FadeExample />
                     </Box>
-                    
+                    {/* <RouterLink to='/cartpage'> */}
                     <Box mt={1}  w='100px' ml={2} > 
                         
                          <Flex justifyContent='space-evenly' marginTop='5px'>
                         <a href='/'><FaRegHeart  size={25} /></a>
-                        <a href='/'><AiOutlineShoppingCart  size={28} /></a>
+                        <a href='/cartpage'><AiOutlineShoppingCart  size={28} /></a>
                          </Flex> 
                         
                     </Box>
