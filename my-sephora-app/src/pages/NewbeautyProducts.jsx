@@ -5,8 +5,8 @@ import Products from './product1list'
 
 function NewbeautyProducts() {
   return (
-   <Box display='flex' border='2px solid black'>
-        <Box border='2px solid red' w='20%' >
+   <Box display='flex'>
+        <Box  w='20%' >
             <Stack align={'flex-start'} ml='40px' mt='30px'>
                 <Heading as='h4' size='md'>
                     New
@@ -22,7 +22,7 @@ function NewbeautyProducts() {
               
             </Stack>
         </Box>
-        <Box border='2px solid blue' w='85%'>
+        <Box w='85%'>
             <Products />
         </Box>
    </Box>

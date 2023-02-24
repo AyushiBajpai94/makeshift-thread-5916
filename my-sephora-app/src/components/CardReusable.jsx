@@ -1,18 +1,19 @@
 import { StarIcon } from '@chakra-ui/icons';
 import {
     Box,
+   Button,
    Image,
 
   } from '@chakra-ui/react';
 
+  import {Link as RouterLink} from 'react-router-dom'
 
-
-export default function CardReusable({id,image,Brandname,Title,price,rating}) {
+export default function CardReusable({id,image,Brandname,Title,price,rating,setorderBy}) {
    
     return (
-      <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+      <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' key={id}>
         <Image src={image} alt='imageAlt' />
-  
+  <RouterLink  to={`/bath-body/${id}`}>
         <Box p='6'>
           <Box
             mt='1'
@@ -34,9 +35,9 @@ export default function CardReusable({id,image,Brandname,Title,price,rating}) {
           </Box>
   
           <Box>
-            {price}
+            ${price}
           </Box>
-  
+         
           <Box display='flex' mt='2' alignItems='center'>
             {Array(5)
               .fill('')
@@ -46,11 +47,17 @@ export default function CardReusable({id,image,Brandname,Title,price,rating}) {
                   color={i <rating ? 'teal.500' : 'gray.300'}
                 />
               ))}
-            {/* <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-              {reviewCount} reviews
-            </Box> */}
+           
           </Box>
+          <br/>
+          <RouterLink to='/cartpage'>
+          <Button colorScheme='pink' size='sm'>
+               Add To Cart
+          </Button>
+          </RouterLink>
+         
         </Box>
+        </RouterLink>
       </Box>
     )
   }

@@ -297,8 +297,8 @@ import {
           href: '#',
         },
         {
-            label: 'Face',
-            href: '#',
+            label: 'Eye',
+            href: '/eyeProducts',
           },
           {
             label: 'Foundation',
@@ -484,7 +484,7 @@ import {
         children: [
           {
             label: 'All Bath & Body',
-            href: '#',
+            href: '/bath&bodyProducts',
           },
           {
             label: 'Body Wash & Shower Gel',
