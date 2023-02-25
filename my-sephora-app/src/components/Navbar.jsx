@@ -19,8 +19,8 @@ import {
   import {Link as RouterLink}  from 'react-router-dom';
   import { InputGroup,InputLeftElement } from '@chakra-ui/react';
   import { Input } from '@chakra-ui/react'
-  import { FaRegHeart, FaShoppingCart, FaStore } from "react-icons/fa";
-  import {AiOutlineShoppingCart} from 'react-icons/ai'
+  import { FaRegHeart, FaShoppingCart, FaStore, FaUser } from "react-icons/fa";
+  import {AiOutlineShoppingCart, AiOutlineUser} from 'react-icons/ai'
   import {HiOutlineUserGroup,} from "react-icons/hi";
  import FadeExample from '../pages/fade'
   import {
@@ -163,6 +163,7 @@ import { AuthContext } from '../Context/AuthContextProvider';
                          <Flex justifyContent='space-evenly' marginTop='5px'>
                         <a href='/'><FaRegHeart  size={25} /></a>
                         <a href='/cartpage'><AiOutlineShoppingCart  size={28} /></a>
+                        <a href='/admin'><AiOutlineUser  size={25} /></a>
                          </Flex> 
                         
                     </Box>

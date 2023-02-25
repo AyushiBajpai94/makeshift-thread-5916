@@ -1,0 +1,133 @@
+
+import ProductForm from "../components/ProductForm";
+import ProductItem from '../components/ProductItem';
+import Pagination from '../components/pagination'
+import { useState, useEffect } from "react";
+import { Heading } from "@chakra-ui/react";
+
+
+const getData = async (url) => {
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return {
+      totalCount: +res.headers.get(`X-Total-Count`),
+      data,
+    }
+  } catch (error) {
+    console.log("error by me");
+  }
+}
+
+function Admin() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+
+  const fetchAndUpdateData = async (page) => {
+    setLoading(true);
+    try {
+      let res = await getData(`https://mockserver-y04s.onrender.com/Eye?_page=${page}&_limit=6`);
+      const { totalCount, data } = res;
+      setProducts(data);
+      setTotalCount(totalCount);
+      setLoading(false);
+    } catch (error) {
+      setError(true);
+      setLoading(false);
+    }
+  };
+console.log('totalCount:',totalCount)
+  const handlePageChange = (val) => {
+    const changeBy = page + val;
+    setPage(changeBy);
+  };
+  
+  useEffect(() => {
+    //during mount phase
+    fetchAndUpdateData(page);
+  }, [page]);
+
+  const handleFormSubmit = (formData) => {
+    setLoading(true);
+    fetch(`https://mockserver-y04s.onrender.com/Eye`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        setLoading(false);
+        fetchAndUpdateData(page);
+      })
+      .catch((err) => {
+        setError(true);
+        setLoading(false);
+      });
+
+      
+  }
+  const handledelete= async(id)=>{
+      try {
+            const deletData=  await fetch(`https://mockserver-y04s.onrender.com/Eye/${id}`,{
+              method:"DELETE",
+              headers:{
+                "Content-Type":'application/json',
+              }
+            });
+            if(deletData.ok){
+              const data1=await deletData.json();
+              fetchAndUpdateData(page);
+              console.log(data1)
+            }
+          } catch (err) {
+            setError(true)
+          }
+};
+  
+
+  return loading ? (<h1>loading...</h1>) : error ?
+    (<h1>Something went wrong .. please refresh</h1>)
+    :
+    (<div className="App">
+      <ProductForm handleFormSubmit={handleFormSubmit} />
+      <hr />
+      <br />
+      <br />
+      <div id="products-display">
+        <Heading >Products</Heading>
+        <div
+           style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3,1fr)",
+            margin: "25px",
+            gap: "20px",
+          }}
+        >
+
+          {products.map((prod) => (
+            <ProductItem key={prod.id}
+              id={prod.id}
+              name={prod.name}
+              price={prod.price}
+              image={prod.image}
+              handledelete={handledelete}
+             
+               />
+          ))}
+        </div>
+      </div>
+      <Pagination
+        page={page}
+        handlePageChange={handlePageChange}
+        totalCount={totalCount}
+      />
+    </div>
+    );
+}
+
+export default Admin;

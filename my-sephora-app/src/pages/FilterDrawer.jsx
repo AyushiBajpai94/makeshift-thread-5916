@@ -66,7 +66,6 @@ export default function DrawerEx({setorderBy}) {
 
          <Divider variant="solid" orientation='horizontal' colorScheme={"red"} size="20px"/>
 
-            <Input type={"text"} placeholder='search product'/>
             </DrawerBody>
               
           

@@ -8,6 +8,8 @@ import NewbeautyProducts from '../pages/NewbeautyProducts'
 import ProductCardDetail from '../pages/SingleproductPage'
 import Paymentpage from '../pages/paymentpage'
 import PrivateRoute from './PrivateRoute'
+import Admin from '../pages/Admin'
+import Orderplaced from '../pages/orderplaced'
 
 export default function AllRoute(){
     return(
@@ -15,15 +17,20 @@ export default function AllRoute(){
              <Route path='/' element={<Home />}/>
              {/* <Route path='/signup' element={<Signup />}/> */}
              <Route path='/login' element={<Login />}/>
+             <Route path='/admin' element={<Admin />}/>
              <Route path='/newbeautyProducts' element={<NewbeautyProducts />}/>
              <Route  path='/eyeProducts' element={<EyeProduct />}/>
              <Route path='/bath&bodyProducts' element={<BathAndBodyProduct />} />
              <Route path='/bath-body/:id' element={<ProductCardDetail />} />
              <Route path='/cartpage' element={
-                    <CartPage />
+                <PrivateRoute >
+                     <CartPage />
+                </PrivateRoute>
+                   
              
              } />
              <Route path='/payment' element={<Paymentpage />} />
+             <Route path='/orderplaced' element={<Orderplaced />}/>
              
         </Routes>
     )
