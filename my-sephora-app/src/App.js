@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar'
-import CaptionCarousel from './pages/carasoul'
 import AllRoute from './components/AllRoutes';
 import Footer from './components/Footer';
 function App() {
